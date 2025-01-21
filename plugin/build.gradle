@@ -1,0 +1,45 @@
+apply plugin: 'groovy'
+apply plugin: 'java'
+apply plugin: 'java-library'
+apply plugin : 'maven-publish'
+
+repositories {
+    mavenCentral()
+}
+dependencies {
+    //gradle sdk
+    implementation gradleApi()
+    //groovy sdk
+    implementation localGroovy()
+    //添加 gradle
+    implementation 'com.android.tools.build:gradle:3.6.1'
+    implementation 'org.ow2.asm:asm:5.0.3'
+    implementation 'org.ow2.asm:asm-commons:5.0.3'
+
+    implementation 'org.javassist:javassist:3.28.0-GA'
+}
+
+// 将该插件上传到本地Maven库
+group = 'com.qcsdk.plugin' // 组名
+version = "1.0.1"
+
+publishing {
+    // 上传在线Maven Central库
+    publications {
+        release(MavenPublication) {
+            groupId = group
+            version = version
+            artifactId = 'qcasm-plugin-gradle'
+            afterEvaluate {
+                from components.java
+            }
+        }
+    }
+    // 配置仓库地址
+    repositories {
+        maven {
+            url layout.buildDirectory.dir("maven-repo")
+        }
+    }
+}
+
