@@ -21,7 +21,7 @@ dependencies {
 
 // 将该插件上传到本地Maven库
 group = 'com.qcsdk.plugin' // 组名
-version = "1.0.1"
+version = "1.0.2"
 
 publishing {
     // 上传在线Maven Central库
