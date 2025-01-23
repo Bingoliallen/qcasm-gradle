@@ -13,11 +13,12 @@ import org.gradle.api.Project
 import java.util.jar.JarEntry
 import java.util.jar.JarFile
 import java.util.jar.JarOutputStream
+import groovy.lang.GroovyObject
 
 /**
  * 自定义的 Transform 类
  */
-class QCTransform extends Transform {
+class QCTransform extends Transform implements GroovyObject {
     private Project mProject
     private final Logger logger;
     private String[] classPrefixes = null;
@@ -25,6 +26,15 @@ class QCTransform extends Transform {
     public QCTransform(Project project) {
         this.mProject = project;
         this.logger = project.getLogger();
+    }
+
+    @Override
+    public Object getProperty(String property) {
+        // 实现 getProperty 方法逻辑
+        if (property == "customProperty") {
+            return "Custom Property Value"
+        }
+        return null
     }
 
     @Override
