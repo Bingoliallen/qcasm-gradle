@@ -4,7 +4,7 @@ import org.objectweb.asm.ClassVisitor
 import org.objectweb.asm.MethodVisitor
 import org.objectweb.asm.Opcodes
 
-class CustomClassVisitor extends ClassVisitor {
+class CustomClassVisitor extends ClassVisitor implements GroovyObject  {
     private String[] classPrefixes
     private String oldSuperName
     private String newSuperName
@@ -12,6 +12,16 @@ class CustomClassVisitor extends ClassVisitor {
     CustomClassVisitor(ClassVisitor classVisitor, String[] classPrefixes) {
         super(Opcodes.ASM7, classVisitor)
         this.classPrefixes = classPrefixes
+    }
+
+
+    @Override
+    public Object getProperty(String property) {
+        // 实现 getProperty 方法逻辑
+        if (property == "customProperty") {
+            return "Custom Property Value"
+        }
+        return null
     }
 
     @Override
