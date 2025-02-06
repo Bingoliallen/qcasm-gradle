@@ -21,12 +21,8 @@ class CustomClassVisitor extends ClassVisitor implements GroovyObject  {
     }
 
     @Override
-    public Object getProperty(String property) {
-        // 实现 getProperty 方法逻辑
-        if (property == "customProperty") {
-            return "Custom Property Value"
-        }
-        return null
+    Object getProperty(String propertyName) {
+        return super.getProperty(propertyName)
     }
 
     @Override
