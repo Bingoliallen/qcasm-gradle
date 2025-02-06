@@ -16,12 +16,22 @@ class CustomClassVisitor extends ClassVisitor implements GroovyObject  {
 
 
     @Override
+    Object invokeMethod(String name, Object args) {
+        return super.invokeMethod(name, args)
+    }
+
+    @Override
     public Object getProperty(String property) {
         // 实现 getProperty 方法逻辑
         if (property == "customProperty") {
             return "Custom Property Value"
         }
         return null
+    }
+
+    @Override
+    void setProperty(String propertyName, Object newValue) {
+        super.setProperty(propertyName, newValue)
     }
 
     @Override

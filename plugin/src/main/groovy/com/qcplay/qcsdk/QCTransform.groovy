@@ -13,7 +13,6 @@ import org.gradle.api.Project
 import java.util.jar.JarEntry
 import java.util.jar.JarFile
 import java.util.jar.JarOutputStream
-import groovy.lang.GroovyObject
 
 /**
  * 自定义的 Transform 类
@@ -29,12 +28,22 @@ class QCTransform extends Transform implements GroovyObject {
     }
 
     @Override
+    Object invokeMethod(String name, Object args) {
+        return super.invokeMethod(name, args)
+    }
+
+    @Override
     public Object getProperty(String property) {
         // 实现 getProperty 方法逻辑
         if (property == "customProperty") {
             return "Custom Property Value"
         }
         return null
+    }
+
+    @Override
+    void setProperty(String propertyName, Object newValue) {
+        super.setProperty(propertyName, newValue)
     }
 
     @Override

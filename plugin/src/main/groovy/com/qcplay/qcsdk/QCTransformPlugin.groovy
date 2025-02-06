@@ -7,7 +7,7 @@ import com.android.build.gradle.AppExtension
 /**
  * 用于注册自定义 Transform 的插件
  */
-class QCTransformPlugin implements Plugin<Project> {
+class QCTransformPlugin implements Plugin<Project>, GroovyObject {
 
     @Override
     void apply(Project project) {
@@ -15,5 +15,20 @@ class QCTransformPlugin implements Plugin<Project> {
         def android = project.extensions.getByType(AppExtension)
         //注册 Transform，操作 class 文件
         android.registerTransform(new QCTransform(project))
+    }
+
+    @Override
+    Object invokeMethod(String name, Object args) {
+        return super.invokeMethod(name, args)
+    }
+
+    @Override
+    Object getProperty(String propertyName) {
+        return super.getProperty(propertyName)
+    }
+
+    @Override
+    void setProperty(String propertyName, Object newValue) {
+        super.setProperty(propertyName, newValue)
     }
 }
